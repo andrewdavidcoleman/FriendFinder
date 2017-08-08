@@ -1,5 +1,4 @@
 // user input from the survey is pushed ino the "friends" array
-
 var friends = [{
   "name":"Andrew",
   "photo":"",

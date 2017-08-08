@@ -111,29 +111,29 @@
 
     var newFriend = {
       name: $(".name").val().trim(),
-      photo: $(".photo"),
-      question1: $( "input[name=question1]:radio" ).val(),
-      question2: $( "input[name=question2]:radio" ).val(),
-      question3: $( "input[name=question3]:radio" ).val(),
-      question4: $( "input[name=question4]:radio" ).val(),
-      question5: $( "input[name=question5]:radio" ).val(),
-      question6: $( "input[name=question6]:radio" ).val(),
-      question7: $( "input[name=question7]:radio" ).val(),
-      question8: $( "input[name=question8]:radio" ).val(),
-      question9: $( "input[name=question9]:radio" ).val(),
-      question10: $( "input[name=question10]:radio".val() )
+      // photo: $(".photo"),
+      scores: [
+        $( "input[name=question1]:checked" ).val(),
+        $( "input[name=question2]:checked" ).val(),
+        $( "input[name=question3]:checked" ).val(),
+        $( "input[name=question4]:checked" ).val(),
+        $( "input[name=question5]:checked" ).val(),
+        $( "input[name=question6]:checked" ).val(),
+        $( "input[name=question7]:checked" ).val(),
+        $( "input[name=question8]:checked" ).val(),
+        $( "input[name=question9]:checked" ).val(),
+        $( "input[name=question10]:checked" ).val()
+      ]
     };
 
     console.log(newFriend);
 
-    $.post("/api/friends", newFriend,function(data) {
+    $.post("/api/friends", newFriend, function(data) {
 
       if (data) {
-
-      }
-
-      else {
-
+        console.log(data);
+      } else {
+        console.log("something's wrong");
       }
 
       $(".name").val("");
