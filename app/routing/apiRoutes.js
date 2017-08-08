@@ -12,6 +12,7 @@ module.exports = function(app) {
   // incoming survery results go here
   app.post("/api/friends", function(req, res) {
     friendData.push(req.body);
+    res.json(true);
   });
   // ===================================
 };
