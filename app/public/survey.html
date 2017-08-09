@@ -31,7 +31,7 @@
         <input type="radio" name="question2" value="4"> 4
         <input type="radio" name="question2" value="5"> 5
       </div>
-      <!-- <div class="question-3">
+      <div class="question-3">
         <h5>My spirituality and/or belief structure is very important to me:</h5>
         <input type="radio" name="question3" value="1"> 1
         <input type="radio" name="question3" value="2"> 2
@@ -94,7 +94,7 @@
         <input type="radio" name="question10" value="3"> 3
         <input type="radio" name="question10" value="4"> 4
         <input type="radio" name="question10" value="5"> 5
-      </div> -->
+      </div>
       <br>
       <input class="submit" type="submit">
     </form>
@@ -135,6 +135,7 @@
       // log when we get a confirmation back from the server
       if (data) {
         console.log(newFriend.name + " added!");
+        // console.log(newFriend);
       } else {
         console.log("something's wrong:/");
       }
@@ -148,21 +149,30 @@
     // gather all the friend objects from the server
     $.get("/api/friends", function(data) {
 
-      console.log(data);
+      var compatibility = 0;
 
-      for (var i = 0; i < data.length; i++) {
-        var person = data[i];
-        console.log(person.name);
-        console.log(parseInt(person.scores));
-        for (var i = 0; i < person.scores.length; i++) {
-          console.log(person.scores[i]);
+      for (var i = 0; i < data.length-1; i++) { //loop through the object of all friends
+        var person = data[i]; //variable that will hold each friend during their iteration
+        // console.log(person); //log each friend object as it loops
+        // console.log(person.scores); //and an array with their respective answers to each question
+
+        for (var j = 0; j < person.scores.length; j++) { //loop through each friends answers
+          var difference = parseInt(newFriend.scores[j])-parseInt(person.scores[j]);// variable holding the difference in the users answers and everyone elses
+
+          if (difference >=0) { //if the difference is a positive number or zero
+            var fromZero = difference; //reassign it to a variable called fromZero
+          } else if (difference < 0) { //if the difference is a negative number
+            var fromZero = -difference; //convert it to positive and reassign it to fromZero
+          }
+          compatibility = compatibility+fromZero; //add each fromZero to the compatibilty variable
         };
-      }
 
+        console.log("Total compatibility score with " + person.name + ": " + compatibility);
 
+        compatibility = 0;
+      };
 
     });
-
 
   });
 
