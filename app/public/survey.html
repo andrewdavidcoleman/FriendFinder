@@ -150,6 +150,7 @@
     $.get("/api/friends", function(data) {
 
       var compatibility = 0;
+      var compArr = [];
 
       for (var i = 0; i < data.length-1; i++) { //loop through the object of all friends
         var person = data[i]; //variable that will hold each friend during their iteration
@@ -168,9 +169,17 @@
         };
 
         console.log("Total compatibility score with " + person.name + ": " + compatibility);
-
+        compArr.push(compatibility)
+        // console.log(compArr);
+        lowestDiff = Math.min(...compArr);
+        // console.log(lowestDiff);
         compatibility = 0;
+
       };
+      var matchIndex = compArr.indexOf(lowestDiff)
+      // console.log(matchIndex);
+      var winner = data[matchIndex];
+      console.log("Your new best friend is " + winner.name + "!");
 
     });
 
