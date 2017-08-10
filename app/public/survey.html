@@ -3,7 +3,11 @@
   <head>
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- Latest compiled and minified CSS -->
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <meta charset="utf-8">
     <title>Survey</title>
@@ -98,8 +102,27 @@
             <input type="radio" name="question10" value="5"> 5
           </div>
           <br>
-          <input class="submit" type="submit">
+          <!-- Button trigger modal -->
+<button id="submit" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Submit
+</button>
         </form>
+        <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel"></h3>
+        </button>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" id="modal-done" class="btn btn-primary" data-dismiss="modal">Done</button>
+      </div>
+    </div>
+  </div>
+</div>
+      </div>
       </div>
     </div>
   </body>
@@ -108,9 +131,11 @@
 
 <script type="text/javascript">
 
+
   // when user files out the survey and hits submit, this happens
-  $(".submit").on("click", function(event) {
+  $("#submit").on("click", function(event) {
     event.preventDefault();
+    $('#myModal').modal('show');
 
     // object to hold user input
     var newFriend = {
@@ -156,8 +181,8 @@
 
       for (var i = 0; i < data.length-1; i++) { //loop through the object of all friends
         var person = data[i]; //variable that will hold each friend during their iteration
-        // console.log(person); //log each friend object as it loops
-        // console.log(person.scores); //and an array with their respective answers to each question
+        console.log(person); //log each friend object as it loops
+        console.log(person.scores); //and an array with their respective answers to each question
 
         for (var j = 0; j < person.scores.length; j++) { //loop through each friends answers
           var difference = parseInt(newFriend.scores[j])-parseInt(person.scores[j]);// variable holding the difference in the users answers and everyone elses
@@ -181,7 +206,10 @@
       var matchIndex = compArr.indexOf(lowestDiff)
       // console.log(matchIndex);
       var winner = data[matchIndex];
-      console.log("Your new best friend is " + winner.name + "!");
+      console.log("Your new friend is " + winner.name + "!");
+
+      $(".modal-title").html("Your new friend is:<br>" + winner.name);
+      $(".modal-body").html(winner.name + " likes mojitos and long walks on the beach. You will be great together.");
 
     });
 
