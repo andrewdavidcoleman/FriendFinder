@@ -102,26 +102,25 @@
             <input type="radio" name="question10" value="5"> 5
           </div>
           <br>
-          <!-- Button trigger modal -->
-<button id="submit" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Submit
-</button>
+          <!-- Button to trigger modal -->
+          <button id="submit" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Submit</button>
         </form>
         <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title" id="exampleModalLabel"></h3>
-        </button>
-      </div>
-      <div class="modal-body"></div>
-      <div class="modal-footer">
-        <button type="button" id="modal-done" class="btn btn-primary" data-dismiss="modal">Done</button>
-      </div>
-    </div>
-  </div>
-</div>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel"></h3>
+              </div>
+              <div class="modal-body">
+                <!-- photo will appear here -->
+              </div>
+              <div class="modal-footer">
+                <button type="button" id="modal-done" class="btn btn-primary" data-dismiss="modal">Done</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       </div>
     </div>
@@ -209,7 +208,7 @@
       console.log("Your new friend is " + winner.name + "!");
 
       $(".modal-title").html("Your new friend is:<br>" + winner.name);
-      $(".modal-body").html(winner.name + " likes mojitos and long walks on the beach. You will be great together.");
+      $(".modal-body").html("<img src='" + winner.photo + "' alt='no photo' height='150' width='150'><br>" + winner.name + " likes mojitos and long walks on the beach. You will be great together.<br>");
 
     });
 
